@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md">
+        <h2 class="text-center">Lista de tarefa</h2>
+        <div class="text-center">
+            <a class="btn btn-primary" href="/criar_tarefa/">Adicionar Tarefa</a>
+        </div>
+
+        <br>
+        <br>
+        
+        <form action="" method="post">
+            {% csrf_token %} 
+
+            <input class="form-control" type="search" placeholder="Procure por tarefas" id="search" name="search" spellcheck="true"  >
+            <br>
+            <button id="search" class="btn btn-info">Procurar</button>
+        </form>
+
+        <div class="col-12 filter-div">
+            <span>Filtrar por:</span>
+            <select name="filter" id="filter" class="form-control">
+                <option value="">Escolha uma opção</option>
+                <option value="done">Tarefas concluídas</option>
+                <option value="doing">Tarefas a fazer</option>
+            </select>
+        </div>
+        <br>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li {% if message.tags %}class="alert {{ message.tags }}" {% endif %} style="list-style: none;"> {{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if verificacao_user == '1' %}
+            <div class="alert alert-danger" role="alert">
+                Você já esta logado no sistema!
+            </div>
+        {% endif %}
+
+        {% if user == '2' %}
+            <div class="alert alert-danger" role="alert">
+                Seja bem vindo de volta {{user}}
+            </div>
+        {% endif %}
+
+        <br>
+        <ul>
+            {% for tarefa in tarefas %}
+                <li style="list-style: none;">
+                    <span>
+                        {% if tarefa.status == 'done' %}
+                            <a class="btn btn-secondary col-6" href="/ver_tarefa/{{tarefa.id}}">
+                        {% else %}
+                            <a class="btn btn-info col-6" href="/ver_tarefa/{{tarefa.id}}">
+                        {% endif %}
+                            {{ tarefa }}
+                        </a>
+                    </span>
+                    
+                    <a class="btn btn-success col-2" href="/editar_tarefa/{{tarefa.id}}">Editar</a>
+                    <a class="btn btn-danger col-2" href="/excluir_tarefa/{{tarefa.id}}">Excluir</a>
+                        {% if tarefa.status == 'done' %}
+                            <a class="btn btn-secondary" href="/concluir_tarefa/{{tarefa.id}}">Desmarcar  
+                        {% else %}
+                            <a class="btn btn-warning" href="/concluir_tarefa/{{tarefa.id}}">Concluir
+                        {% endif %}
+                            </a>
+                </li>
+                <br>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="col-md-3">
+
+    </div>
+</div>
+{% endblock %}

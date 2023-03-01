@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %} Alterar senha {% endblock %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-md-3">
+
+    </div>
+
+    <div class="col-md">
+        <h1 class="mt-5 text-center"><strong>Alteração de senha</strong></h1>
+        <br>
+
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li{% if message.tags %}class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <br>
+        <form action="{% url 'alterar_senha_deslogado' %}" method="POST">
+            {% csrf_token %}
+            <label class="mt-3"><strong>Nome:</strong></label>
+            <br>
+            <input class="form-control" type="text" placeholder="Nome" name="nome">
+            <br>
+            <br>
+            <label><strong>Senha nova:</strong></label>
+            <br>
+            <input class="form-control" type="password" placeholder="Senha nova" name="senha_nova">
+            <br>
+            <br>
+            <label><strong>Confirmar senha:</strong></label>
+            <br>
+            <input class="form-control" type="password" placeholder="Confirmar senha" name="confirmar_senha">
+            <br>
+            <br>
+            <input type="submit" value="Alterar senha" class="btn btn-success col-4">
+        </form>
+    </div>
+
+    <div class="col-md-3">
+        
+    </div>
+
+</div>
+
+{% endblock %}

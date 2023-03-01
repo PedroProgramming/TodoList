@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Cadastrar {% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-3">
+
+    </div>
+
+    <div class="col-md">
+        <h1 class="text-center">Cadastrar</h1>
+
+        {% if cadastro_info == '0' %}
+        <div class="alert alert-success" role="alert">
+            Usuário cadastrado com successo
+        </div>
+        {% endif %}
+
+        {% if cadastro_info == '1' %}
+        <div class="alert alert-danger" role="alert">
+            Campos inválidos
+        </div>
+        {% endif %}
+
+        {% if cadastro_info == '2' %}
+        <div class="alert alert-danger" role="alert">
+            Senha tem que ser igual ou maior que 8 digitos
+        </div>
+        {% endif %}
+
+        {% if cadastro_info == '3' %}
+        <div class="alert alert-danger" role="alert">
+            Senhas diferentes
+        </div>
+        {% endif %}
+
+        {% if cadastro_info == '4' %}
+        <div class="alert alert-danger" role="alert">
+            Usuário já existe.
+        </div>
+        {% endif %}
+
+        {% if cadastro_info == '5' %}
+        <div class="alert alert-danger" role="alert">
+            Captcha invalido.
+        </div>
+        {% endif %}
+
+        <form action="{% url 'cadastro' %}" method="POST">
+            {% csrf_token %}
+            <label>Nome</label>
+            <input class="form-control" type="text" placeholder="Nome..." name="nome">
+            <br>
+            <label>Email</label>
+            <input class="form-control" type="email" placeholder="Email..." name="email">
+            <br>
+            <label>Senha</label>
+            <input class="form-control" type="password" placeholder="Senha..." name="senha">
+            <br>
+            <label>Confirmar Senha</label>
+            <input class="form-control" type="password" placeholder="Confirmar senha..." name="confirmar_senha">
+            <br>
+            {{ captcha|crispy }}
+            <br>
+            <input type="submit" class="btn btn-primary" value="Cadastrar">
+            <a class="btn btn-warning" href="/auth/login/">Login</a>
+        </form>
+    </div>
+
+    <div class="col-md-3">
+
+    </div>
+</div>
+{% endblock %}

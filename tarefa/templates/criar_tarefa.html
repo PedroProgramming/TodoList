@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %} Criar Tarefa {% endblock %}
+
+
+{% block content %}
+<div class="row">
+
+    <div class="col-md-3">
+    </div>
+
+    <div class="col-md">
+        <h1 class="text-center">Criar Tarefa</h1>
+
+        <br>
+
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li {% if message.tags %}class="alert alert-{{ message.tags }}" {% endif %} style="list-style: none;"> {{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <br>
+        <form action="" method="POST">
+            {% csrf_token %}
+
+            <label>Titulo</label>
+            <input class="form-control" type="text" placeholder="Titulo da tarefa..." name="titulo">
+            <br>
+            <br>
+            <label>Descrição</label>
+            <input class="form-control" type="text" placeholder="Descrição ta tarefa..." name="descricao">
+            <br>
+            <br>
+            <input type="submit" class="btn btn-success col-3" value="Criar">
+            <a  href="/home/" class="btn btn-primary col-3">Voltar</a>
+        </form>
+    </div>
+
+    <div class="col-md-3">
+
+    </div>
+</div>
+{% endblock %}

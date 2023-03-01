@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Editar Tarefa {% endblock %}
+
+{% block content %}
+
+<div class="row">
+
+
+    <div class="col-md-3">
+
+    </div>
+
+    <div class="col-md">
+
+        <h1><strong>Você está editando: {{tarefa.titulo}}</strong></h1>
+        <br>
+        <form action="{% url 'editar_tarefa' tarefa.id %}" method="POST">
+            {% csrf_token %}
+
+            {{ editar_tarefa|crispy }}
+
+            <br>
+            <input type="submit" class="btn btn-success col-3" value="Editar">
+            <a href="/home/" class="btn btn-primary col-3">Voltar</a>
+        </form>
+    </div>
+
+    <div class="col-md-3">
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}

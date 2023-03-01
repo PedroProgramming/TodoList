@@ -1,0 +1,50 @@
+{% extends 'admin.html' %}
+
+
+{% block title %} Usuarios {% endblock %}
+
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-md-2">
+
+    </div>
+
+    <div class="col-md">
+        <h6 class="text-center mt-3">Pesquisar por usuario no sistema</h6>
+
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li{% if message.tags %}class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form method="POST" action="">
+            {% csrf_token %}
+
+            <input class="form-control" type="search" placeholder="Pesquisar" id="search" name="search" spellcheck="true">
+        </form>
+
+        <br><br>
+
+        {% for all_user in all_users %}
+            <li style="list-style: none;">
+                <span>
+                    <a href="/admin_sistema/view_user/{{all_user.id}}">{{ all_user }}</a>
+                </span>
+            </li>
+            <hr>
+        {% endfor %}
+    </div>
+
+    <div class="col-md-2">
+
+    </div>
+
+</div>
+
+{% endblock %}

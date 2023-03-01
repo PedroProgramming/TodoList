@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} Ver tarefa {% endblock %}
+
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-md-3">
+    </div>
+    
+    <div class="col-md">
+        <br>
+        <br>
+        <br>
+        <h2 class="text-center">Você está vendo a tarefa: {{ver_tarefa.titulo}}</h2>
+
+        <label>Titulo:</label><br>
+        <input type="text" class="form-control" value="{{ver_tarefa.titulo}}" disabled><br>
+        <label>Descrição:</label><br>
+        <input type="text" class="form-control" value="{{ver_tarefa.descricao}}" disabled>
+        <br>
+        <a href="/home/" class="btn btn-primary col-3">Voltar</a>
+        <p style="float: right;"><strong>Campos apenas para leitura!</strong></p>
+    </div>
+
+    <div class="col-md-3">
+    </div>
+
+</div>
+{% endblock %}

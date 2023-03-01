@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-3">
+
+    </div>
+
+    <div class="col-md">
+        <h1 class="text-center">Login</h1>
+
+        {% if login_info == '1' %}
+        <div class="alert alert-danger" role="alert">
+            Campos inválidos
+        </div>
+        {% endif %}
+
+        {% if login_info == '2' %}
+        <div class="alert alert-danger" role="alert">
+            Se você está logado e acessou está página, significa que você deslogou e precisará fazer login novamente.
+        </div>
+        {% endif %}
+
+        {% if login_info == '3' %}
+        <div class="alert alert-danger" role="alert">
+            Voce nao pode alterar senha sem ta logado
+        </div>
+        {% endif %}
+        
+        {% if login_info == '4' %}
+        <div class="alert alert-danger" role="alert">
+            Nome ou senha invalidos. Deseja <a href="/alterar_senha_deslogado/">Redefinir senha</a>?
+        </div>
+        {% endif %}
+
+        {% if login_info == '5' %}
+        <div class="alert alert-success" role="alert">
+            Senha alterada com sucesso.
+        </div>
+        {% endif %}
+
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <label>Nome</label>
+            <input class="form-control" type="text" placeholder="Nome..." name="nome">
+            <br>
+            <label>Senha</label>
+            <input class="form-control" type="password" placeholder="Senha..." name="senha">
+            <br>
+            <input type="submit" class="btn btn-primary" value="Entrar">
+            <a class="btn btn-warning" href="/auth/cadastro/">Cadastrar</a>
+        </form>
+    </div>
+
+    <div class="col-md-3">
+
+    </div>
+</div>
+{% endblock %}
