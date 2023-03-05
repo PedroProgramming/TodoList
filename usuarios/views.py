@@ -26,6 +26,7 @@ def cadastro(request):
         }
 
         return render(request, 'cadastro.html', context=context)
+    
     elif request.method == 'POST':
         nome = request.POST.get('nome')
         email = request.POST.get('email')
@@ -51,8 +52,9 @@ def cadastro(request):
                     email=email,
                     password=senha,
                 )
+                
+                user.save()
                 return redirect('/auth/cadastro/?cadastro_info=0')
-
             except:
                 return redirect('/auth/cadastro/?cadastro_info=4')
 
